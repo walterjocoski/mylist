@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">MyList</string>
+    <string name="btn_confirm">Confirmar</string>
+    <string name="product_name">Nome do produto</string>
+    <string name="insert_information">Digite as informações</string>
+    <string name="quantity">Quantidade</string>
+    <string name="unit_price">Valor Unidade</string>
+    <string name="fields_message">Os campos devem ser preenchidos.</string>
+    <string name="save">Salvar</string>
+    <string name="title_dialog">Deseja salvar este item?</string>
+    <string name="dialog_preview">Produto: %1$s, Quantidade: %2$d, Valor: %3$.2f</string>
+    <string name="result_int">%1$d</string>
+    <string name="result_double">%1$.2f</string>
+    <string name="delete_message">Você realmente quer excluir o registro?</string>
+</resources>
