@@ -22,6 +22,6 @@ interface ProductDao {
     @Update
     fun update(product: Product)
 
-//    @Query("SELECT SUM(totalValue) FROM Product")
-//    fun getTotalValue()
+    @Query("SELECT SUM(totalValue) FROM Product")
+    fun getTotalValue(): Double
 }

@@ -33,8 +33,8 @@ class MainActivity : AppCompatActivity(), OnListClickListener {
             startActivity(Intent(this, AddActivity::class.java))
         }
 
-        val result = mutableListOf<Product>()
-        val adapter = MainAdapter(result, this)
+        result = mutableListOf()
+        adapter = MainAdapter(result, this)
 
 
         rvMain = findViewById(R.id.rv_main)
@@ -46,6 +46,8 @@ class MainActivity : AppCompatActivity(), OnListClickListener {
             val app = application as App
             val dao = app.db.product()
             val response = dao.getRegisterById()
+            val soma = String.format("%.2f", dao.getTotalValue())
+            vlTotal.text = soma
 
             runOnUiThread {
                 result.addAll(response)
@@ -54,12 +56,11 @@ class MainActivity : AppCompatActivity(), OnListClickListener {
         }.start()
 
 
-
     }
 
     override fun onClick(id: Int, type: String) {
         val intent = Intent(this, AddActivity::class.java)
-        intent.putExtra("updateId",id)
+        intent.putExtra("updateId", id)
         startActivity(intent)
 
         finish()
@@ -81,6 +82,7 @@ class MainActivity : AppCompatActivity(), OnListClickListener {
                         runOnUiThread {
                             result.removeAt(position)
                             adapter.notifyItemRemoved(position)
+                            adapter.notifyItemRangeChanged(position, result.size)
                         }
                     }
                 }.start()
