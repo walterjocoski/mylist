@@ -1,8 +1,10 @@
 package com.example.mylist
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -44,11 +46,13 @@ class AddActivity : AppCompatActivity() {
 
                 }
                 .setNegativeButton(R.string.save) { dialog, which ->
+
+                    val updatedId = intent.extras?.getInt("updateId")
                     Thread {
                         val app = application as App
                         val dao = app.db.product()
 
-                        val updatedId = intent.extras?.getInt("updateId")
+
                         if (updatedId != null) {
                             dao.update(
                                 Product(
@@ -78,6 +82,9 @@ class AddActivity : AppCompatActivity() {
                 }
                 .create()
                 .show()
+
+            val service = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            service.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
 
         }
     }

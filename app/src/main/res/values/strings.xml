@@ -12,4 +12,8 @@
     <string name="result_int">%1$d</string>
     <string name="result_double">%1$.2f</string>
     <string name="delete_message">Você realmente quer excluir o registro?</string>
+    <string name="name">Nome do produto</string>
+    <string name="unit">Quantidade</string>
+    <string name="value">Valor</string>
+    <string name="total_value">Valor Total</string>
 </resources>

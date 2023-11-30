@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mylist.model.OnListClickListener
 import com.example.mylist.model.Product
+import com.example.mylist.model.ProductDao
 
 class MainActivity : AppCompatActivity(), OnListClickListener {
 
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity(), OnListClickListener {
             startActivity(Intent(this, AddActivity::class.java))
         }
 
-        result = mutableListOf()
+        result = mutableListOf<Product>()
         adapter = MainAdapter(result, this)
 
 
@@ -45,7 +46,7 @@ class MainActivity : AppCompatActivity(), OnListClickListener {
         Thread {
             val app = application as App
             val dao = app.db.product()
-            val response = dao.getRegisterById()
+            val response = dao.getRegister()
             val soma = String.format("%.2f", dao.getTotalValue())
             vlTotal.text = soma
 
@@ -58,11 +59,12 @@ class MainActivity : AppCompatActivity(), OnListClickListener {
 
     }
 
-    override fun onClick(id: Int, type: String) {
+    override fun onClick(id: Int) {
         val intent = Intent(this, AddActivity::class.java)
-        intent.putExtra("updateId", id)
-        startActivity(intent)
 
+        intent.putExtra("updateId", id)
+
+        startActivity(intent)
         finish()
     }
 
@@ -82,7 +84,6 @@ class MainActivity : AppCompatActivity(), OnListClickListener {
                         runOnUiThread {
                             result.removeAt(position)
                             adapter.notifyItemRemoved(position)
-                            adapter.notifyItemRangeChanged(position, result.size)
                         }
                     }
                 }.start()
@@ -137,7 +138,7 @@ class MainActivity : AppCompatActivity(), OnListClickListener {
                 }
 
                 container.setOnClickListener {
-                    listener.onClick(item.id, item.type)
+                    listener.onClick(item.id)
                 }
 
             }

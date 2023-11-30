@@ -14,7 +14,7 @@ interface ProductDao {
     fun insert(product: Product)
 
     @Query("SELECT * FROM Product")
-    fun getRegisterById(): List<Product>
+    fun getRegister(): List<Product>
 
     @Delete
     fun delete(product: Product): Int
@@ -24,4 +24,7 @@ interface ProductDao {
 
     @Query("SELECT SUM(totalValue) FROM Product")
     fun getTotalValue(): Double
+
+    @Query("SELECT * FROM Product WHERE id = :id")
+    fun getProductById(id: Int): List<Product>
 }

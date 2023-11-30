@@ -30,26 +30,75 @@
         android:text="Total"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@id/btn_add"
-        app:layout_constraintTop_toTopOf="@id/btn_add"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btn_add" />
 
     <Button
         android:id="@+id/btn_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:text="Adicionar Item"
         app:layout_constraintStart_toStartOf="@id/txt_title"
         app:layout_constraintTop_toBottomOf="@id/txt_title" />
 
+    <LinearLayout
+        android:id="@+id/linear_topo_lista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_add">
+
+        <TextView
+            android:id="@+id/txt_product_name"
+            android:layout_width="160dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/name"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_product_quant"
+            android:layout_width="48dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/unit"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_product_value"
+            android:layout_width="48dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/value"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_product_total_value"
+            android:layout_width="48dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/total_value"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/btn_add" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/linear_topo_lista"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
