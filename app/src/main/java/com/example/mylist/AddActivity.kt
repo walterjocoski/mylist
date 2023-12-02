@@ -25,7 +25,9 @@ class AddActivity : AppCompatActivity() {
         editQtd = findViewById(R.id.edit_quantity)
         editPrice = findViewById(R.id.edit_price)
 
-        val updatedId = intent.extras?.getInt("updateId") ?: throw IllegalStateException("type not found")
+        val updatedId =
+            intent.extras?.getInt("updateId")
+
         updatedId?.let {
             displayProductDetails(it)
         }
@@ -82,7 +84,7 @@ class AddActivity : AppCompatActivity() {
                             )
                         }
                         runOnUiThread {
-                             openMainActivity()
+                            openMainActivity()
                         }
                     }.start()
                 }

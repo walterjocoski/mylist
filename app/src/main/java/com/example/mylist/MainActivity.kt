@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mylist.model.OnListClickListener
 import com.example.mylist.model.Product
-import com.example.mylist.model.ProductDao
 
 class MainActivity : AppCompatActivity(), OnListClickListener {
 
@@ -30,13 +29,13 @@ class MainActivity : AppCompatActivity(), OnListClickListener {
         btn = findViewById(R.id.btn_add)
         vlTotal = findViewById(R.id.txt_vltotal)
 
+
         btn.setOnClickListener {
             startActivity(Intent(this, AddActivity::class.java))
         }
 
         result = mutableListOf<Product>()
         adapter = MainAdapter(result, this)
-
 
         rvMain = findViewById(R.id.rv_main)
         rvMain.layoutManager = LinearLayoutManager(this)
@@ -75,15 +74,15 @@ class MainActivity : AppCompatActivity(), OnListClickListener {
                 Thread {
                     val app = application as App
                     val dao = app.db.product()
+                    dao.delete(product)
+                    val soma = String.format("%.2f", dao.getTotalValue())
 
-                    val response = dao.delete(product)
-
-                    if (response > 0) {
-                        runOnUiThread {
-                            result.removeAt(position)
-                            adapter.notifyItemRemoved(position)
-                        }
+                    runOnUiThread {
+                        result.removeAt(position)
+                        adapter.notifyItemRemoved(position)
+                        vlTotal.text = soma
                     }
+
                 }.start()
 
             }
