@@ -1,6 +1,8 @@
 # mylist
 
-Aplicativo simples, onde eu gero uma lista de itens. Posso incluir, editar ou remover. 
+Simple app, where i generate a list of items. I can include, update and remove them. I'm still improving this app while I'm studying. 
+
+
 
 ![Lista Vazia](https://i.postimg.cc/43df68XD/emptylist.jpg)
 ![Add Item](https://i.postimg.cc/yYm8sgfb/additem.jpg)
