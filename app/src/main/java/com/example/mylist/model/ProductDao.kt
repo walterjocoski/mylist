@@ -26,5 +26,5 @@ interface ProductDao {
     fun getTotalValue(): Double
 
     @Query("SELECT * FROM Product WHERE id = :id")
-    fun getProductById(id: Int): List<Product>
+    fun getProductById(id: Int): Product
 }

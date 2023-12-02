@@ -61,9 +61,7 @@ class MainActivity : AppCompatActivity(), OnListClickListener {
 
     override fun onClick(id: Int) {
         val intent = Intent(this, AddActivity::class.java)
-
         intent.putExtra("updateId", id)
-
         startActivity(intent)
         finish()
     }

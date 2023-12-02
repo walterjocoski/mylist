@@ -25,6 +25,11 @@ class AddActivity : AppCompatActivity() {
         editQtd = findViewById(R.id.edit_quantity)
         editPrice = findViewById(R.id.edit_price)
 
+        val updatedId = intent.extras?.getInt("updateId") ?: throw IllegalStateException("type not found")
+        updatedId?.let {
+            displayProductDetails(it)
+        }
+
         val btnConfirm: Button = findViewById(R.id.btn_confirm)
         btnConfirm.setOnClickListener {
             if (!validate()) {
@@ -37,6 +42,8 @@ class AddActivity : AppCompatActivity() {
             val price = editPrice.text.toString().toDouble()
             val total = qtd * price
 
+
+
             AlertDialog.Builder(this)
                 .setTitle(R.string.title_dialog)
                 .setMessage(getString(R.string.dialog_preview, name, qtd, price))
@@ -47,11 +54,10 @@ class AddActivity : AppCompatActivity() {
                 }
                 .setNegativeButton(R.string.save) { dialog, which ->
 
-                    val updatedId = intent.extras?.getInt("updateId")
+
                     Thread {
                         val app = application as App
                         val dao = app.db.product()
-
 
                         if (updatedId != null) {
                             dao.update(
@@ -76,7 +82,7 @@ class AddActivity : AppCompatActivity() {
                             )
                         }
                         runOnUiThread {
-                            openMainActivity()
+                             openMainActivity()
                         }
                     }.start()
                 }
@@ -99,5 +105,22 @@ class AddActivity : AppCompatActivity() {
                 && editQtd.text.toString().isNotEmpty()
                 && editPrice.text.toString().isNotEmpty()
                 && !editQtd.text.toString().startsWith("0"))
+    }
+
+    private fun displayProductDetails(productId: Int) {
+        Thread {
+            val app = application as App
+            val dao = app.db.product()
+
+            val response = dao.getProductById(productId)
+
+            runOnUiThread {
+                response?.let { product ->
+                    editName.setText(product.productName)
+                    editQtd.setText(product.quantity.toString())
+                    editPrice.setText(product.unitValue.toString())
+                }
+            }
+        }.start()
     }
 }
